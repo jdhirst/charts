@@ -1,0 +1,3 @@
+# Ignore helm depends
+src/**/charts
+src/**/Chart.lock
