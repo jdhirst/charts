@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   common:
   - apiVersion: v2
-    created: "2023-02-20T10:28:26.151994517+01:00"
+    created: "2023-02-20T10:31:28.986153568+01:00"
     description: Function library for k8s-at-home charts
-    digest: a7565508dd3a984206772a09d130a42ae1620370f9f03aeab9655c0a74dc1ba9
+    digest: 9fb7a7e5e038df58c02ff1ef4cdc02ef90250e733c2dc93c62e6f7d43dd500ff
     home: https://github.com/jdhirst/charts/tree/master/common
     keywords:
     - k8s-at-home
@@ -20,9 +20,9 @@ entries:
     version: 4.5.2
   firefly-iii:
   - apiVersion: v2
-    created: "2023-02-20T10:28:26.153870182+01:00"
+    created: "2023-02-20T10:31:28.987146342+01:00"
     description: Installs Firefly III
-    digest: b7979d9d815c48126fd90824bf646672dbd2e604eb1f6b5ea9e51a9db532d78b
+    digest: 55abdccd8d8ffcec6d547bfa7f11f9617c7e67f254c5c03bd6332cd1f5fcbf0f
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -37,7 +37,7 @@ entries:
     version: 1.3.4
   firefly-mariadb:
   - apiVersion: v2
-    created: "2023-02-20T10:28:26.154586221+01:00"
+    created: "2023-02-20T10:31:28.98770959+01:00"
     description: Installs a mariadb db for Firefly III
     digest: e36e627afd3f01b397b3d8de05507b98211524d9b6a38971d4e8ca0cec1a8b2b
     maintainers:
@@ -57,7 +57,7 @@ entries:
           description: Upgraded `common` chart dependency to version 4.5.2
     apiVersion: v2
     appVersion: 2022.5.4
-    created: "2023-02-20T10:28:26.187032175+01:00"
+    created: "2023-02-20T10:31:29.009213773+01:00"
     dependencies:
     - name: common
       repository: https://jdhirst.github.io/charts
@@ -94,10 +94,27 @@ entries:
     urls:
     - https://jdhirst.github.io/charts/packed/home-assistant-13.4.2.tgz
     version: 13.4.2
+  importer:
+  - apiVersion: v2
+    created: "2023-02-20T10:31:29.010005673+01:00"
+    description: Deploys the importer chart for Firefly III
+    digest: af52c589c7cb3fa637c30dad00700966ea957269850606e69587d1efdfbae014
+    home: https://www.firefly-iii.org/
+    icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
+    maintainers:
+    - email: firefly-iii@mor.re
+      name: morremeyer
+    name: importer
+    sources:
+    - https://github.com/firefly-iii/data-importer
+    type: application
+    urls:
+    - https://jdhirst.github.io/charts/packed/importer-1.3.2.tgz
+    version: 1.3.2
   k8s-mediaserver:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-20T10:28:26.188813025+01:00"
+    created: "2023-02-20T10:31:29.01245447+01:00"
     description: A Helm chart for Kubernetes mediaserver
     digest: d59f0f88f9488fbf844211e73576942894422c2159316e9ef832699bea778ccb
     name: k8s-mediaserver
@@ -105,4 +122,4 @@ entries:
     urls:
     - https://jdhirst.github.io/charts/packed/k8s-mediaserver-0.7.0.tgz
     version: 0.7.0
-generated: "2023-02-20T10:28:26.14846852+01:00"
+generated: "2023-02-20T10:31:28.982490477+01:00"

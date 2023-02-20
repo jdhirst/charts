@@ -1,6 +1,10 @@
 # Makefile for various helm chart repo actions
 
-default: depends lint pack index
+default: repo depends lint pack index
+
+# Update helm repositories
+repo:
+	helm repo update
 
 # Update all dependencies for subcharts
 depends:
