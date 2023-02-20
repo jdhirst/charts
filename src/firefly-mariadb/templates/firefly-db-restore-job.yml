@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ template "firefly-db.fullname" . }}-restore
+  labels:
+    app: {{ template "firefly-db.name" . }}
+    chart: {{ template "firefly-db.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  ttlSecondsAfterFinished: 100
+  parallelism: 1    
+  completions: 1
+  template:
+    spec:
+      containers:
+      - name: {{ template "firefly-db.fullname" . }}-restore
+        image: mariadb:10.11
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: {{ template "firefly-db.fullname" . }}-config
+        command: 
+        - /bin/sh
+        - -c
+        - |
+          echo "Performing restore of db"
+          ls -la
+          mysql -h {{ template "firefly-db.fullname" . }} -p$MYSQL_PASSWORD -u $MYSQL_USER $MYSQL_DATABASE < /var/lib/backup/${MYSQL_DATABASE}.sql
+          echo "done"
+        volumeMounts:
+          - name: backup-storage
+            mountPath: /var/lib/backup
+      restartPolicy: Never
+      volumes:
+        - name: backup-storage
+          {{- if eq .Values.backup.destination "pvc" }}
+          persistentVolumeClaim:
+            claimName: {{ default (printf "%s-%s" (include "firefly-db.fullname" .) "backup-storage-claim") .Values.backup.pvc.existingClaim }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

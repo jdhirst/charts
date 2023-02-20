@@ -1,6 +1,12 @@
 # Makefile for various helm chart repo actions
 
-default: lint pack index
+default: depends lint pack index
+
+# Update all dependencies for subcharts
+depends:
+	for i in src/* ; do \
+		helm dependency update $$i ; \
+	done
 
 # Generate a new repo index file
 index:

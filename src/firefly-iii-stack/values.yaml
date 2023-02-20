@@ -1,0 +1,31 @@
+# More detailed values can be gathered from each of the subcharts directly
+
+firefly-db:
+  # if you set this to false it will not be installed
+  enabled: true
+
+firefly-iii:
+  # -- Set to false to not deploy Firefly III
+  enabled: true
+
+importer:
+  # -- Set to false to not deploy the importer
+  enabled: true
+
+redis:
+  enabled: false
+  global:
+    redis:
+      password: ""
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      namespace: "openshift-user-workload-monitoring"
+  master:
+    persistence:
+      enabled: false
+    service:
+      type: LoadBalancer
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-internal: "true"

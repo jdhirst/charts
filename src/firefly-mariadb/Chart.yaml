@@ -1,0 +1,10 @@
+apiVersion: v2
+name: firefly-mariadb
+version: 0.2.2
+description: Installs a mariadb db for Firefly III
+type: application
+sources:
+  - https://github.com/jdhirst/charts/tree/master/src/firefly-mariadb
+maintainers:
+  - name: jdhirst
+    email: jdhirst@hirstgroup.net

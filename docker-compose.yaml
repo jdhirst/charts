@@ -1,0 +1,46 @@
+version: "3"
+services:
+### FIREFLY III ###
+  firefly-app:
+    image: fireflyiii/core:latest
+    restart: always
+    volumes:
+      - firefly_iii_upload:/var/www/html/storage/upload
+    env_file: ./firefly-iii.env
+    ports:
+      - 8080
+    depends_on:
+      - firefly-db
+    networks:
+      - master
+  firefly-db:
+    image: mariadb    
+    hostname: fireflyiiidb
+    restart: always
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=firefly
+      - MYSQL_PASSWORD=ohn8thadiepiba5Huvi8thee7w
+      - MYSQL_DATABASE=firefly
+    volumes:
+      - firefly_iii_db:/var/lib/mysql
+    networks:
+      - master
+  firefly-fidi:
+    image: fireflyiii/data-importer:latest
+    restart: always
+    env_file: ./fidi.env
+    ports:
+      - 8080
+    depends_on:
+      - firefly-app
+    networks:
+      - master
+
+### NETWORKS / VOLUMES ###
+networks:
+  master:
+volumes:
+  prometheus_data:
+  firefly_iii_upload:
+  firefly_iii_db:

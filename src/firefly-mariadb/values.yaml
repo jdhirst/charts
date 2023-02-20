@@ -1,0 +1,32 @@
+image:
+  repository: mariadb
+  tag: 10.11
+  pullPolicy: IfNotPresent
+
+storage:
+  class: ~
+  accessModes: ReadWriteOnce
+  dataSize: 1Gi
+  # -- Use an existing PersistentVolumeClaim, overrides values above
+  existingClaim: ""
+  
+backup:
+  # There are two possible backup destinations currently implemented, http and pvc
+  destination: pvc
+  pvc:
+    class: ~
+    accessModes: ReadWriteOnce
+    dataSize: 5Gi
+    # -- Use an existing PersistentVolumeClaim, overrides values above
+    existingClaim: ""
+
+configs:
+  MYSQL_RANDOM_ROOT_PASSWORD: yes
+  MYSQL_USER: firefly
+  MYSQL_PASSWORD: changeme
+  MYSQL_DATABASE: firefly
+  TZ: Europe/Amsterdan
+    # -- Set this to the name of a secret to load environment variables from. If defined, values in the secret will override values in configs
+  existingSecret: ""
+
+backupSchedule: "0 3 * * *"
