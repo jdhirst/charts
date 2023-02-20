@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   common:
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.399489198+01:00"
+    created: "2023-02-20T14:34:54.253521951+01:00"
     description: Function library for k8s-at-home charts
-    digest: fa873b8b0208d41e6ba93960ab4778afdbb7ed530ac9419eadd1c934331f91c8
+    digest: 8ccfd11d70dc0ac47b1e3070bfd382cd3cdd8ca3c2b7898b3a0084fcc1c2b06f
     home: https://github.com/jdhirst/charts/tree/master/common
     keywords:
     - k8s-at-home
@@ -20,9 +20,9 @@ entries:
     version: 4.5.2
   firefly-iii:
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.400490325+01:00"
+    created: "2023-02-20T14:34:54.254401327+01:00"
     description: Installs Firefly III
-    digest: 55905f10938441afd9d3099f50ebd42f1784dcf1c5af811b8e0c3f7639a40f9e
+    digest: 26855181227a7cc1120abbdaabbd5a118f2c7bdf93c240e221cf3bc0d01fee8a
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -37,7 +37,40 @@ entries:
     version: 1.3.4
   firefly-iii-stack:
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.422473242+01:00"
+    created: "2023-02-20T14:34:54.288313133+01:00"
+    dependencies:
+    - condition: firefly-mariadb.enabled
+      name: firefly-mariadb
+      repository: https://jdhirst.github.io/charts/
+      version: 0.2.3
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.7.5
+    - condition: firefly-iii.enabled
+      name: firefly-iii
+      repository: https://jdhirst.github.io/charts/
+      version: 1.3.4
+    - condition: importer.enabled
+      name: importer
+      repository: https://jdhirst.github.io/charts/
+      version: 1.3.2
+    description: Installs Firefly III stack (db, app, importer)
+    digest: ac5e42cf1fc4fa0d0982ed76702f784db756fa062602769cff64dd186244bb2d
+    home: https://github.com/jdhirst/charts
+    icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
+    maintainers:
+    - email: jdhirst@hirstgroup.net
+      name: jdhirst
+    name: firefly-iii-stack
+    sources:
+    - https://github.com/jdhirst/charts
+    type: application
+    urls:
+    - https://jdhirst.github.io/charts/packed/firefly-iii-stack-0.7.3.tgz
+    version: 0.7.3
+  - apiVersion: v2
+    created: "2023-02-20T14:34:54.27645636+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -70,7 +103,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-iii-stack-0.7.2.tgz
     version: 0.7.2
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.412307833+01:00"
+    created: "2023-02-20T14:34:54.266782781+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -104,9 +137,9 @@ entries:
     version: 0.7.1
   firefly-mariadb:
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.424786977+01:00"
+    created: "2023-02-20T14:34:54.28945188+01:00"
     description: Installs a mariadb db for Firefly III
-    digest: 68c2ca083c4e3e5700efd49b7b0105a436627a34ee838f445cf00acd029ecd04
+    digest: 598a3507d20470398e8b7ba5728dc595e728b250e0e02c9fb09921e1651ad11c
     maintainers:
     - email: jdhirst@hirstgroup.net
       name: jdhirst
@@ -118,7 +151,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-mariadb-0.2.3.tgz
     version: 0.2.3
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.424105518+01:00"
+    created: "2023-02-20T14:34:54.288874779+01:00"
     description: Installs a mariadb db for Firefly III
     digest: 17079ba448b7c842bf3fcfa8c3172684ab95b3eb844926ff71a3d160826a9f93
     maintainers:
@@ -138,7 +171,7 @@ entries:
           description: Upgraded `common` chart dependency to version 4.5.2
     apiVersion: v2
     appVersion: 2022.5.4
-    created: "2023-02-20T14:32:50.445602811+01:00"
+    created: "2023-02-20T14:34:54.310328633+01:00"
     dependencies:
     - name: common
       repository: https://jdhirst.github.io/charts
@@ -156,7 +189,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 5.3.5
     description: Home Assistant
-    digest: 1e24330c6dbf555c720373ad1f13a4126645200735c2c82de0ca93b62016ca76
+    digest: 3f123a232229760b2f4bcd1712bfd0311cfc2c16c132c9ccaedb40b24d502171
     home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/home-assistant
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Home_Assistant_Logo.svg/519px-Home_Assistant_Logo.svg.png
     keywords:
@@ -177,9 +210,9 @@ entries:
     version: 13.4.2
   importer:
   - apiVersion: v2
-    created: "2023-02-20T14:32:50.446293715+01:00"
+    created: "2023-02-20T14:34:54.311110047+01:00"
     description: Deploys the importer chart for Firefly III
-    digest: 2b8fe14a9ddbd8418ebda433edda6bcd790446285886c578de8abcb267669dba
+    digest: 4b7524ac96ae23a84d9427c58b98ee53745986cebd8c750996840bdb3824482b
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -195,12 +228,12 @@ entries:
   k8s-mediaserver:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-20T14:32:50.447580019+01:00"
+    created: "2023-02-20T14:34:54.312547162+01:00"
     description: A Helm chart for Kubernetes mediaserver
-    digest: 0257a8900d05604a7adbab09aef94692c6e88cf9fc6652111435f6111846e9ce
+    digest: 9d2722c445a0c7ca075053b3f235c1b2856e98512d5a7bb8b9e33cb88ecaab00
     name: k8s-mediaserver
     type: application
     urls:
     - https://jdhirst.github.io/charts/packed/k8s-mediaserver-0.7.0.tgz
     version: 0.7.0
-generated: "2023-02-20T14:32:50.39577892+01:00"
+generated: "2023-02-20T14:34:54.250304027+01:00"
