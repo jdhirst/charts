@@ -1,6 +1,6 @@
 # More detailed values can be gathered from each of the subcharts directly
 
-firefly-db:
+firefly-mariadb:
   # if you set this to false it will not be installed
   enabled: true
 
