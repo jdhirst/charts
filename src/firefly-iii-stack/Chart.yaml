@@ -1,11 +1,11 @@
 apiVersion: v2
 name: firefly-iii-stack
-version: 0.7.2
+version: 0.7.3
 description: Installs Firefly III stack (db, app, importer)
 type: application
 dependencies:
 - name: firefly-mariadb
-  version: 0.2.2
+  version: 0.2.3
   condition: firefly-mariadb.enabled
   repository: https://jdhirst.github.io/charts/
 - name: redis

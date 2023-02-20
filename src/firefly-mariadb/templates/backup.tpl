@@ -5,8 +5,13 @@ spec:
     image: mariadb:10.11
     imagePullPolicy: IfNotPresent
     envFrom:
+    {{- if not .Values.configs.existingSecret }}
     - configMapRef:
         name: {{ template "firefly-db.fullname" . }}-config
+    {{- else }}
+    - secretRef:
+        name: {{ .Values.configs.existingSecret }}
+    {{- end }}
     command:
     - /bin/sh
     - -c
