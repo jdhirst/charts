@@ -31,6 +31,9 @@ general:
   ingress:
     ingressClassName: ""
 
+  # Annotations to apply to all deployments
+  annotations: {}
+
 sonarr:
   enabled: true
   container:

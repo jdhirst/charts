@@ -20,6 +20,8 @@ spec:
       labels:
         app.kubernetes.io/name: {{ include "jellyfin.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        {{ toYaml .Values.annotations | indent 4 }}
     spec:
     {{- if .Values.enableDLNA }}
       hostNetwork: true

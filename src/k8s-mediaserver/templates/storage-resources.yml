@@ -1,4 +1,5 @@
 ---
+{{ if .Values.sonarr.enabled }}
 {{- if not .Values.general.storage.customVolume }}
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -13,7 +14,9 @@ spec:
   storageClassName: {{ if (kindIs "invalid" .Values.general.storage.pvcStorageClass) }}""{{- else }}{{ .Values.general.storage.pvcStorageClass | quote }}{{- end }}
 {{- end }}
 {{- with .Values.sonarr.volume }}
+{{ end }}
 ---
+{{ if .Values.radarr.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -39,7 +42,9 @@ spec:
   {{- end }}
 {{- end }}
 {{- with .Values.radarr.volume }}
+{{ end }}
 ---
+{{ if .Values.plex.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -65,7 +70,9 @@ spec:
   {{- end }}
 {{- end }}
 {{- with .Values.plex.volume }}
+{{ end }}
 ---
+{{ if .Values.jackett.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -91,7 +98,9 @@ spec:
   {{- end }}
 {{- end }}
 {{- with .Values.jackett.volume }}
+{{ end }}
 ---
+{{ if .Values.sabnzbd.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -117,7 +126,9 @@ spec:
   {{- end }}
 {{- end }}
 {{- with .Values.sabnzbd.volume }}
+{{ end }}
 ---
+{{ if .Values.transmission.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -143,6 +154,7 @@ spec:
   {{- end }}
 {{- end }}
 {{- with .Values.transmission.volume }}
+{{ end }}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

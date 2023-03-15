@@ -47,6 +47,8 @@ spec:
       labels:
         {{- include "k8s-mediaserver.selectorLabels" . | nindent 8 }}
         app: sonarr
+      annotations:
+        {{ toYaml .Values.general.annotations | indent 4 }}
     spec:
       initContainers:
         - name: config-sonarr
