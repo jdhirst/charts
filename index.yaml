@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   common:
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.104247199+01:00"
+    created: "2023-03-20T09:37:23.386793381+01:00"
     description: Function library for k8s-at-home charts
-    digest: f94cc4b688cbbf2f506d5adfba6ae415d9600e43fd1768852cb2fe2de698527a
+    digest: c9c95ee0cb3b078c26d29db40bf17f312def0531cb4cea84e502bd7a1c6c68e3
     home: https://github.com/jdhirst/charts/tree/master/common
     keywords:
     - k8s-at-home
@@ -20,9 +20,9 @@ entries:
     version: 4.5.2
   firefly-iii:
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.105439902+01:00"
+    created: "2023-03-20T09:37:23.38773392+01:00"
     description: Installs Firefly III
-    digest: 1c2370c166c593ef161dc6390031b0a7289760c1abebb7c9a6d06cc9ecb053be
+    digest: 076df4e0255ceebb8c33c375ac1f0b7a88a9018252d5056e2f1259e6c16d161a
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -37,7 +37,7 @@ entries:
     version: 1.3.4
   firefly-iii-stack:
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.147066629+01:00"
+    created: "2023-03-20T09:37:23.422142174+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -56,7 +56,7 @@ entries:
       repository: https://jdhirst.github.io/charts/
       version: 1.3.2
     description: Installs Firefly III stack (db, app, importer)
-    digest: fdfb6133a4c77ef9b832ac75fa00090ae9cd5ae099e725d36f92a43e8a51d615
+    digest: 82c5a4e888a9c7c13371d618186823ff91d758e3f98d4447d77ff8ace0be9cb3
     home: https://github.com/jdhirst/charts
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -70,7 +70,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-iii-stack-0.7.3.tgz
     version: 0.7.3
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.133133889+01:00"
+    created: "2023-03-20T09:37:23.411813473+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -103,7 +103,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-iii-stack-0.7.2.tgz
     version: 0.7.2
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.117929847+01:00"
+    created: "2023-03-20T09:37:23.399635904+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -137,9 +137,9 @@ entries:
     version: 0.7.1
   firefly-mariadb:
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.148471133+01:00"
+    created: "2023-03-20T09:37:23.423493682+01:00"
     description: Installs a mariadb db for Firefly III
-    digest: 8353044cda8e175af25b2c50d5762300c4d6635c4b83c208735a356a9e4f3f33
+    digest: 57b42e8a1dd507ef94f0b4fec6b7b15f3cb4b002b96d05abb5248ee75b46ccaf
     maintainers:
     - email: jdhirst@hirstgroup.net
       name: jdhirst
@@ -151,7 +151,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-mariadb-0.2.3.tgz
     version: 0.2.3
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.147906896+01:00"
+    created: "2023-03-20T09:37:23.422958888+01:00"
     description: Installs a mariadb db for Firefly III
     digest: 17079ba448b7c842bf3fcfa8c3172684ab95b3eb844926ff71a3d160826a9f93
     maintainers:
@@ -171,7 +171,7 @@ entries:
           description: Upgraded `common` chart dependency to version 4.5.2
     apiVersion: v2
     appVersion: 2022.5.4
-    created: "2023-03-15T13:42:53.176981196+01:00"
+    created: "2023-03-20T09:37:23.445960246+01:00"
     dependencies:
     - name: common
       repository: https://jdhirst.github.io/charts
@@ -189,7 +189,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 5.3.5
     description: Home Assistant
-    digest: 849c87c1278b83beca8d9456fce28910b939cb727b7961039fd3f130ea5b1184
+    digest: 348bdd39af63557d8270891acdc760a89c4e2429f1b89202b80906b2e2852858
     home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/home-assistant
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Home_Assistant_Logo.svg/519px-Home_Assistant_Logo.svg.png
     keywords:
@@ -210,9 +210,9 @@ entries:
     version: 13.4.2
   importer:
   - apiVersion: v2
-    created: "2023-03-15T13:42:53.17775382+01:00"
+    created: "2023-03-20T09:37:23.446793112+01:00"
     description: Deploys the importer chart for Firefly III
-    digest: 8faf526edf5769b1bb3ba1eb7e4515190f2b227a5350bbd9aeffa99b846f6060
+    digest: 4330c228724445964e07377eb7cada8ff186662880ac426ec5b4837892cef99a
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -228,9 +228,9 @@ entries:
   jellyfin:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-03-15T13:42:53.178424024+01:00"
+    created: "2023-03-20T09:37:23.447499011+01:00"
     description: Jellyfin Media Server
-    digest: 4022fc1a560d0c162c258a09f5872a6b8a6ce3d8ee6e7ccd46aa5532e7268d37
+    digest: 4b7f5e97259df6704f0ce43f5b79632ed3d09ead2e11c39e05162078e208d3b0
     name: jellyfin
     type: application
     urls:
@@ -239,12 +239,41 @@ entries:
   k8s-mediaserver:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-03-15T13:42:53.180806601+01:00"
+    created: "2023-03-20T09:37:23.449010755+01:00"
     description: A Helm chart for Kubernetes mediaserver
-    digest: 9d40abd8e7bf12a0de3532fab2b2c9838d7ba40a9533022248d8dc5797b840cd
+    digest: cf361166371c2d9a8a76d2a81eb81745a98d5656e040d17f6566347283c5c6b5
     name: k8s-mediaserver
     type: application
     urls:
     - https://jdhirst.github.io/charts/packed/k8s-mediaserver-0.7.0.tgz
     version: 0.7.0
-generated: "2023-03-15T13:42:53.099817961+01:00"
+  minecraft:
+  - annotations:
+      artifacthub.io/links: |
+        - name: Image source
+          url: https://github.com/itzg/docker-minecraft-server
+        - name: Image DockerHub
+          url: https://hub.docker.com/r/itzg/minecraft-server
+    apiVersion: v1
+    appVersion: SeeValues
+    created: "2023-03-20T09:37:23.450685322+01:00"
+    description: Minecraft server
+    digest: 1912479c26d834a2ba28764f0e038fed2b57e715247ce4b1b92ce613398bee51
+    home: https://minecraft.net/
+    keywords:
+    - game
+    - server
+    maintainers:
+    - email: gtaylor@gc-taylor.com
+      name: gtaylor
+    - email: jeff@billimek.com
+      name: billimek
+    - email: itzgeoff@gmail.com
+      name: itzg
+    name: minecraft
+    sources:
+    - https://github.com/itzg/minecraft-server-charts
+    urls:
+    - https://jdhirst.github.io/charts/packed/minecraft-4.6.0.tgz
+    version: 4.6.0
+generated: "2023-03-20T09:37:23.383533061+01:00"
