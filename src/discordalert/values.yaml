@@ -1,0 +1,6 @@
+discordalert:
+  environment:
+    DISCORD_WEBHOOK: replaceme
+  repository:
+    image: benjojo/alertmanager-discord
+    tag: latest
