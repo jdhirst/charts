@@ -176,15 +176,18 @@ spec:
 {{ if .Values.jackett.ingress.tls.enabled }}
   tls:
     - hosts:
-        - {{ .Values.general.ingress_host | quote }}
+        - "jackett.in.ocp.hirstgroup.net"
+        #- {{ .Values.general.ingress_host | quote }}
       secretName: {{ .Values.jackett.ingress.tls.secretName }}
 {{ end }}
   ingressClassName: {{ .Values.general.ingress.ingressClassName }}
   rules:
-    - host: {{ .Values.general.ingress_host | quote }}
+    #- host: {{ .Values.general.ingress_host | quote }}
+    - host: "jackett.in.ocp.hirstgroup.net"
       http:
         paths:
-          - path: {{ .Values.jackett.ingress.path }}
+          - path: /
+          #- path: {{ .Values.jackett.ingress.path }}
             pathType: Prefix
             backend:
               service:

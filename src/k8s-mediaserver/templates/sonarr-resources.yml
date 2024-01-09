@@ -99,6 +99,9 @@ spec:
             - name: mediaserver-volume
               mountPath: "/tv"
               subPath: "{{ .Values.general.storage.subPaths.tv }}"
+            - name: mediaserver-volume
+              mountPath: "/anime"
+              subPath: "{{ .Values.general.storage.subPaths.anime }}"
           {{- with .Values.sonarr.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

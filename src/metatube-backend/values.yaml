@@ -1,0 +1,24 @@
+metatube:
+  environment:
+    HTTP_PROXY: ""
+    HTTPS_PROXY: ""
+  persistence:
+    run:
+      capacity: 1Gi
+      enabled: false
+  repository:
+    image: metatube/metatube-server
+    tag: latest
+
+postgresql:
+  enabled: true
+  auth:
+    # -- postgres user to generate
+    username: metatube
+    # -- postgres pass to generate
+    password: metatube
+    # -- postgress db to generate
+    database: metatube
+  persistence:
+    # -- size of postgres DB
+    size: 1Gi

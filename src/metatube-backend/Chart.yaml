@@ -1,0 +1,13 @@
+# Create on 2023-12-03T10:12:35+01:00
+# Katenary command line: katenary convert
+apiVersion: v2
+appVersion: 0.0.1
+description: A helm chart for metatube-backend
+name: metatube-backend
+type: application
+version: 0.1.0
+dependencies:
+- condition: postgresql.enabled
+  name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 13.2.0
