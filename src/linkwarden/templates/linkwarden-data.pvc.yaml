@@ -1,0 +1,20 @@
+{{ if .Values.linkwarden.persistence.data.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: '{{ .Release.Name }}-data'
+  labels:
+    katenary.io/component: linkwarden
+    katenary.io/project: '{{ .Chart.Name }}'
+    katenary.io/pvc-name: data
+    katenary.io/release: '{{ .Release.Name }}'
+  annotations:
+    katenary.io/docker-compose-sha1: 04df533d359dfc5cb24b0bad8d4af2781a5ce98c
+    katenary.io/version: 2.0.0-beta2
+spec:
+  resources:
+    requests:
+      storage: '{{ .Values.linkwarden.persistence.data.capacity }}'
+  accessModes:
+    - ReadWriteOnce
+{{- end -}}

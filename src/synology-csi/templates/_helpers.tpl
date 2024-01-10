@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "netmaker.name" -}}
+{{- define "synology-csi.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "netmaker.fullname" -}}
+{{- define "synology-csi.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -23,48 +23,39 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 {{- end }}
 
-
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "netmaker.masterKey" -}}
-{{- randAlphaNum 12 | nospace -}}
-{{- end -}}
-
-{{/*
-Create chart name and version as used by the chart label.
-*/}}
-{{- define "netmaker.chart" -}}
+{{- define "synology-csi.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "netmaker.labels" -}}
-helm.sh/chart: {{ include "netmaker.chart" . }}
-{{ include "netmaker.selectorLabels" . }}
+{{- define "synology-csi.labels" -}}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "synology-csi.selectorLabels" . }}
+helm.sh/chart: {{ include "synology-csi.chart" . }}
 {{- end }}
 
 {{/*
-Selector labels
+Selector Labels:
 */}}
-{{- define "netmaker.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "netmaker.name" . }}
+{{- define "synology-csi.selectorLabels" -}}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/name: {{ include "synology-csi.name" . }}
+helm.sh/template: {{ .Template.Name | trimPrefix .Template.BasePath | trimPrefix "/" | replace "/" "_" }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
+Client Info Secret Volume:
 */}}
-{{- define "netmaker.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "netmaker.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
+{{- define "synology-csi.clientInfoSecretVolume" -}}
+name: client-info
+secret:
+  secretName: {{ .Values.clientInfoSecret.name | default (include "synology-csi.fullname" . | printf "%s-client-info") }}
 {{- end }}

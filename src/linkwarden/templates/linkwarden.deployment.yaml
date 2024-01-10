@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: '{{ .Release.Name }}-linkwarden'
+  labels:
+    katenary.io/component: linkwarden
+    katenary.io/project: '{{ .Chart.Name }}'
+    katenary.io/release: '{{ .Release.Name }}'
+  annotations:
+    katenary.io/docker-compose-sha1: 04df533d359dfc5cb24b0bad8d4af2781a5ce98c
+    katenary.io/version: 2.0.0-beta2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      katenary.io/component: linkwarden
+      katenary.io/release: '{{ .Release.Name }}'
+  template:
+    metadata:
+      labels:
+        katenary.io/component: linkwarden
+        katenary.io/release: '{{ .Release.Name }}'
+    spec:
+      containers:
+        - name: linkwarden
+          image: '{{ .Values.linkwarden.repository.image }}{{ if ne .Values.linkwarden.repository.tag "" }}:{{ .Values.linkwarden.repository.tag }}{{ end }}'
+          ports:
+            - name: linkwarden
+              containerPort: 3000
+          env:
+            - name: SPACES_BUCKET_NAME
+              value: '{{ tpl .Values.linkwarden.environment.SPACES_BUCKET_NAME . }}'
+            - name: DATABASE_URL
+              value: '{{ tpl .Values.linkwarden.environment.DATABASE_URL . }}'
+            - name: KEYCLOAK_CLIENT_ID
+              value: '{{ tpl .Values.linkwarden.environment.KEYCLOAK_CLIENT_ID . }}'
+            - name: EMAIL_SERVER
+              value: '{{ tpl .Values.linkwarden.environment.EMAIL_SERVER . }}'
+            - name: SPACES_ENDPOINT
+              value: '{{ tpl .Values.linkwarden.environment.SPACES_ENDPOINT . }}'
+            - name: NEXT_PUBLIC_KEYCLOAK_ENABLED
+              value: '{{ tpl .Values.linkwarden.environment.NEXT_PUBLIC_KEYCLOAK_ENABLED . }}'
+            - name: NEXT_PUBLIC_EMAIL_PROVIDER
+              value: '{{ tpl .Values.linkwarden.environment.NEXT_PUBLIC_EMAIL_PROVIDER . }}'
+            - name: SPACES_KEY
+              value: '{{ tpl .Values.linkwarden.environment.SPACES_KEY . }}'
+            - name: KEYCLOAK_CLIENT_SECRET
+              value: '{{ tpl .Values.linkwarden.environment.KEYCLOAK_CLIENT_SECRET . }}'
+            - name: KEYCLOAK_CUSTOM_NAME
+              value: '{{ tpl .Values.linkwarden.environment.KEYCLOAK_CUSTOM_NAME . }}'
+            - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
+              value: '{{ tpl .Values.linkwarden.environment.NEXT_PUBLIC_CREDENTIALS_ENABLED . }}'
+            - name: EMAIL_FROM
+              value: '{{ tpl .Values.linkwarden.environment.EMAIL_FROM . }}'
+            - name: NEXTAUTH_SECRET
+              value: '{{ tpl .Values.linkwarden.environment.NEXTAUTH_SECRET . }}'
+            - name: SPACES_SECRET
+              value: '{{ tpl .Values.linkwarden.environment.SPACES_SECRET . }}'
+            - name: NEXTAUTH_URL
+              value: '{{ tpl .Values.linkwarden.environment.NEXTAUTH_URL . }}'
+            - name: KEYCLOAK_ISSUER
+              value: '{{ tpl .Values.linkwarden.environment.KEYCLOAK_ISSUER . }}'
+          volumeMounts:
+            - mountPath: /data/data
+              name: data
+      volumes:
+        - name: data
+          {{- if  .Values.linkwarden.persistence.data.enabled }}
+          persistentVolumeClaim:
+            claimName: '{{ .Release.Name }}-data'
+          {{ else }}
+          emptyDir: {}
+          {{- end }}
+

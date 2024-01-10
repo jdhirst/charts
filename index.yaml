@@ -3,16 +3,16 @@ entries:
   cert-manager-webhook-ovh:
   - apiVersion: v1
     appVersion: 0.3.0
-    created: "2023-04-18T12:22:51.003840433+02:00"
+    created: "2024-01-10T09:03:00.39815453+01:00"
     description: OVH DNS cert-manager ACME webhook
-    digest: 4a73ace8183b491350f6c9a7e1f5105b44b03673613d6ab659fd3c2fbd7104b1
+    digest: e7c5b9123aa625e2e43c92a541c27d6f47cec97b7fe46ee33e87611cf50199a9
     name: cert-manager-webhook-ovh
     urls:
     - https://jdhirst.github.io/charts/packed/cert-manager-webhook-ovh-0.3.1.tgz
     version: 0.3.1
   - apiVersion: v1
     appVersion: 0.3.0
-    created: "2023-04-18T12:22:51.003324596+02:00"
+    created: "2024-01-10T09:03:00.39766568+01:00"
     description: OVH DNS cert-manager ACME webhook
     digest: e17eefa3c5032bc3b9cc9aa03d8ab9c05579511bb0b54e1dbb2f53333abc9fe4
     name: cert-manager-webhook-ovh
@@ -21,9 +21,9 @@ entries:
     version: 0.3.0
   common:
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.007409052+02:00"
+    created: "2024-01-10T09:03:00.40238403+01:00"
     description: Function library for k8s-at-home charts
-    digest: 3bbe088ed6282d4064237b126458fc63ecb339a8068cc4f419dda547fb81bf02
+    digest: 633b284b8664362cbbd0a769a2817702a21b886cf0f73a906861e45b0a00e57e
     home: https://github.com/jdhirst/charts/tree/master/common
     keywords:
     - k8s-at-home
@@ -40,19 +40,60 @@ entries:
   discordalert:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2023-04-18T12:22:51.007688671+02:00"
+    created: "2024-01-10T09:03:00.402815257+01:00"
     description: A helm chart for discordalert
-    digest: 20f76109ff9810ff02a585f56b57ab48a3aa513f52c066dce36b4019dafa2cdb
+    digest: 1071ad22f2cd192bd7ddf2d640cc458bb797dbdfd91c985811cf88dbd0c20e6a
     name: discordalert
     type: application
     urls:
     - https://jdhirst.github.io/charts/packed/discordalert-0.1.0.tgz
     version: 0.1.0
+  ejbca:
+  - annotations:
+      category: CertificateAuthority
+      images: |
+        - name: ejbca
+          image: docker.io/bitnami/ejbca:8.0.0-debian-11-r7
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 8.0.0
+    created: "2024-01-10T09:03:00.418941277+01:00"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - ejbca-database
+      version: 14.x.x
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: EJBCA is an enterprise class PKI Certificate Authority software,
+      built using Java (JEE) technology.
+    digest: 4bd404a2929d5cc4fb80b61235638fa3d5c4c7146f3df16e716115281b2719df
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/ejbca/img/ejbca-stack-220x234.png
+    keywords:
+    - ejbca
+    - ca
+    - pki
+    - certificate
+    maintainers:
+    - name: VMware, Inc.
+      url: https://github.com/bitnami/charts
+    name: ejbca
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/ejbca
+    urls:
+    - https://jdhirst.github.io/charts/packed/ejbca-10.1.0.tgz
+    version: 10.1.0
   firefly-iii:
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.0086329+02:00"
+    created: "2024-01-10T09:03:00.420072194+01:00"
     description: Installs Firefly III
-    digest: a9fef6af01f22565e6c3bea2e05692933a848d9ad9d2a43fa5a19b91b270cff2
+    digest: f786b86fac3a7008d5983279ce2782a7de19af9d39af8b2ef1013479523ae993
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -67,7 +108,7 @@ entries:
     version: 1.3.4
   firefly-iii-stack:
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.042048053+02:00"
+    created: "2024-01-10T09:03:00.452911991+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -86,7 +127,7 @@ entries:
       repository: https://jdhirst.github.io/charts/
       version: 1.3.2
     description: Installs Firefly III stack (db, app, importer)
-    digest: ff1303df9871e86ed245865f2620a145e8dc0b5166114c20a6b8bdcb09999bd8
+    digest: 215e902c20fb0000563e7d7edbb07a92f4f52f3b25ec29a3944a1517666fbf1b
     home: https://github.com/jdhirst/charts
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -100,7 +141,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-iii-stack-0.7.3.tgz
     version: 0.7.3
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.031429905+02:00"
+    created: "2024-01-10T09:03:00.442132501+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -133,7 +174,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-iii-stack-0.7.2.tgz
     version: 0.7.2
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.020350818+02:00"
+    created: "2024-01-10T09:03:00.430607244+01:00"
     dependencies:
     - condition: firefly-mariadb.enabled
       name: firefly-mariadb
@@ -167,9 +208,9 @@ entries:
     version: 0.7.1
   firefly-mariadb:
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.043210257+02:00"
+    created: "2024-01-10T09:03:00.454414641+01:00"
     description: Installs a mariadb db for Firefly III
-    digest: 23ad3c74d78b50366857a70c1258a2190b307c4c8367f3100251d46af47dfc33
+    digest: 51a5688324941060cf520d45f1042a21b9b0bf68f9ae5a2d4849417ffe690066
     maintainers:
     - email: jdhirst@hirstgroup.net
       name: jdhirst
@@ -181,7 +222,7 @@ entries:
     - https://jdhirst.github.io/charts/packed/firefly-mariadb-0.2.3.tgz
     version: 0.2.3
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.042648903+02:00"
+    created: "2024-01-10T09:03:00.453758032+01:00"
     description: Installs a mariadb db for Firefly III
     digest: 17079ba448b7c842bf3fcfa8c3172684ab95b3eb844926ff71a3d160826a9f93
     maintainers:
@@ -201,7 +242,7 @@ entries:
           description: Upgraded `common` chart dependency to version 4.5.2
     apiVersion: v2
     appVersion: 2022.5.4
-    created: "2023-04-18T12:22:51.065861634+02:00"
+    created: "2024-01-10T09:03:00.475528637+01:00"
     dependencies:
     - name: common
       repository: https://jdhirst.github.io/charts
@@ -219,7 +260,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 5.3.5
     description: Home Assistant
-    digest: a1a0f878a60dc4c28b0e487962e8b19fbe5be4cfbc474d8ce5e6dec7e72b696e
+    digest: 936be9a943d2106717db2dfd0f358c9ae1e1c60b747a845b85c416ca5cda9cda
     home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/home-assistant
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Home_Assistant_Logo.svg/519px-Home_Assistant_Logo.svg.png
     keywords:
@@ -240,9 +281,9 @@ entries:
     version: 13.4.2
   importer:
   - apiVersion: v2
-    created: "2023-04-18T12:22:51.066702042+02:00"
+    created: "2024-01-10T09:03:00.476303881+01:00"
     description: Deploys the importer chart for Firefly III
-    digest: addd539677566d91feda757db8e843d399091dd5693afdbd3c9ce0eb1a9adac1
+    digest: f8e85d98c63ba85fde1ef7a64217027bc7bda1f0e34623faa515c5de938cfe5a
     home: https://www.firefly-iii.org/
     icon: https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.github/assets/img/logo-small.png
     maintainers:
@@ -258,9 +299,9 @@ entries:
   jellyfin:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-04-18T12:22:51.067581327+02:00"
+    created: "2024-01-10T09:03:00.476960768+01:00"
     description: Jellyfin Media Server
-    digest: 84b469f3b44fab0184962a973a5cbfc411fb1fa22849db53a50274b7568c205e
+    digest: 580d34cb4ba2bf23cce4557cb257313579f69106b7fbccc37f92016806bb80ba
     name: jellyfin
     type: application
     urls:
@@ -269,14 +310,41 @@ entries:
   k8s-mediaserver:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-18T12:22:51.069036732+02:00"
+    created: "2024-01-10T09:03:00.478416126+01:00"
     description: A Helm chart for Kubernetes mediaserver
-    digest: ceba1569c32b5804d17f6597d873e4514ebc4ce23e61f5b1ea0751ff79522bff
+    digest: aeae7452aee01fcd128c8e39cf8cb4353925da7d5e06b66d70f7f535881001e6
     name: k8s-mediaserver
     type: application
     urls:
     - https://jdhirst.github.io/charts/packed/k8s-mediaserver-0.7.0.tgz
     version: 0.7.0
+  linkwarden:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-01-10T09:03:00.478786425+01:00"
+    description: A helm chart for linkwarden
+    digest: dbfd5c0232ef2700fdd0b14a3082c955a36535c09129860c0e60b898b9bb5b02
+    name: linkwarden
+    type: application
+    urls:
+    - https://jdhirst.github.io/charts/packed/linkwarden-0.1.0.tgz
+    version: 0.1.0
+  metatube-backend:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-01-10T09:03:00.487479774+01:00"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.2.0
+    description: A helm chart for metatube-backend
+    digest: ccfac3048450a87dff5389f24988afe367d3811fa7847e951c43e9794d236ac8
+    name: metatube-backend
+    type: application
+    urls:
+    - https://jdhirst.github.io/charts/packed/metatube-backend-0.1.0.tgz
+    version: 0.1.0
   minecraft:
   - annotations:
       artifacthub.io/links: |
@@ -286,9 +354,9 @@ entries:
           url: https://hub.docker.com/r/itzg/minecraft-server
     apiVersion: v1
     appVersion: SeeValues
-    created: "2023-04-18T12:22:51.070814667+02:00"
+    created: "2024-01-10T09:03:00.489363367+01:00"
     description: Minecraft server
-    digest: 0e5188ff0ad5d8034d34c4f16926baf810a84c68b79a5bbfad5dc340927ba7dd
+    digest: a5e907aa2c48a9da334b86214b746f3afdc4382b4527aef6677e15e5bd0bb76d
     home: https://minecraft.net/
     keywords:
     - game
@@ -306,4 +374,80 @@ entries:
     urls:
     - https://jdhirst.github.io/charts/packed/minecraft-4.6.0.tgz
     version: 4.6.0
-generated: "2023-04-18T12:22:51.002639124+02:00"
+  sharry:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: Upgraded `common` chart dependency to version 4.5.2
+    apiVersion: v2
+    appVersion: 1.8.0
+    created: "2024-01-10T09:03:00.501807604+01:00"
+    dependencies:
+    - name: common
+      repository: https://jdhirst.github.io/charts
+      version: 4.5.2
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.0.14
+    - condition: apache.enabled
+      name: apache
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 9.5.3
+    description: Sharry allows to share files with others in a simple way. It is a
+      self-hosted web application. The basic concept is to upload files and get a
+      url back that can then be shared.
+    digest: b7ddf237908e288ef7d398bbc80f1f1c7b7c423cd669ec4fcb7097a0e7f1f3c0
+    home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/sharry
+    icon: https://github.com/eikek/sharry/blob/master/artwork/logo.svg?raw=true
+    keywords:
+    - file sharing
+    maintainers:
+    - email: k8s-at-home@xpander.eml.cc
+      name: auricom
+    name: sharry
+    sources:
+    - https://github.com/eikek/sharry
+    - https://hub.docker.com/r/eikek0/sharry
+    urls:
+    - https://jdhirst.github.io/charts/packed/sharry-5.4.2.tgz
+    version: 5.4.2
+  synology-csi:
+  - apiVersion: v2
+    appVersion: v1.1.2
+    created: "2024-01-10T09:03:00.502984518+01:00"
+    description: A Helm chart for the Synology CSI Driver
+    digest: eb2127679dba82de8b977a64bfa98f5afacf0c7b99db5c7c2b6b8f74195364b8
+    home: https://github.com/christian-schlichtherle/synology-csi-chart
+    keywords:
+    - Synology
+    - CSI Driver
+    kubeVersion: '>= 1.20.0'
+    maintainers:
+    - name: Christian Schlichtherle
+      url: https://github.com/christian-schlichtherle
+    name: synology-csi
+    sources:
+    - https://github.com/christian-schlichtherle/synology-csi-chart/tree/main
+    - https://github.com/SynologyOpenSource/synology-csi/tree/main
+    urls:
+    - https://jdhirst.github.io/charts/packed/synology-csi-0.9.8-SNAPSHOT.tgz
+    version: 0.9.8-SNAPSHOT
+  valheim:
+  - apiVersion: v1
+    appVersion: 0.142.6
+    created: "2024-01-10T09:03:00.503559662+01:00"
+    description: Valheim dedicated server.
+    digest: 8747c7aa09ab8b23dab07efe8f7014d89a977d0ebfd596566d6514df5c3d7298
+    home: https://www.valheimgame.com/
+    icon: https://images.squarespace-cdn.com/content/v1/5e203941ee6ea226e307532c/1591180313714-TA1DE6YCY0ZI4N71H51X/ke17ZwdGBToddI8pDm48kAu641Ux84EsRAFSPI0sGhp7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0pkshKfPpdbFc2TdErj7uCELEZ-jAsNQpHYczxoOmsKneNGVJWmhdcDAqFjgHQH5ag/valheim_transparent.png?format=2500w
+    keywords:
+    - game
+    - server
+    name: valheim
+    sources:
+    - https://github.com/lloesche/valheim-server-docker
+    urls:
+    - https://jdhirst.github.io/charts/packed/valheim-1.0.2.tgz
+    version: 1.0.2
+generated: "2024-01-10T09:03:00.396424108+01:00"

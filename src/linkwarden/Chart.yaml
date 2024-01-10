@@ -1,0 +1,8 @@
+# Create on 2024-01-09T15:26:37+01:00
+# Katenary command line: katenary convert
+apiVersion: v2
+appVersion: 0.0.1
+description: A helm chart for linkwarden
+name: linkwarden
+type: application
+version: 0.1.0
