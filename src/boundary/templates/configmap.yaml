@@ -73,6 +73,7 @@ data:
     {{- end }}
   boundary-config.hcl: |
     disable_mlock = true
+    log_level     = "debug"
     log_format    = "standard"
     controller {
       name        = "kubernetes-controller"
