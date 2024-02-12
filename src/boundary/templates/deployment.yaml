@@ -104,6 +104,8 @@ spec:
             - name: boundary-config
               mountPath: /boundary
               readOnly: true
+            - name: temp
+              mountPath: /tmp
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -135,6 +137,8 @@ spec:
         - name: boundary-config
           configMap:
             name: boundary-config
+        - name: temp
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
