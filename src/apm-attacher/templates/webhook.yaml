@@ -1,0 +1,157 @@
+# This file is based on modifications to Kubernetes Mutating Webhook by Expedia, Inc., which is licensed under Apache 2.0.
+# https://github.com/ExpediaGroup/kubernetes-sidecar-injector
+{{- define "common.labels" }}
+app.kubernetes.io/name: {{ .Release.Name }}
+app.kubernetes.io/component: webhook
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{- define "certs.secret.name" }}
+{{- .Release.Name }}
+{{- end }}
+
+{{- define "service.name" }}
+{{- .Release.Name }}
+{{- end }}
+
+{{- $caPrefix := printf "%s-ca" .Release.Name }}
+{{- $ca := genCA $caPrefix 3650 }}
+{{- $cn := .Release.Name }}
+{{- $csrName := printf "%s.%s.svc" (include "service.name" .) .Release.Namespace }}
+{{- $cert := genSignedCert $cn nil (list $csrName) 3650 $ca }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "certs.secret.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "common.labels" . | indent 4 }}
+data:
+  cert.pem: {{ b64enc $cert.Cert }}
+  key.pem: {{ b64enc $cert.Key }}
+
+{{- $secret_token := .Values.apm.secret_token }}
+{{- $api_key := .Values.apm.api_key }}
+{{ if or $secret_token $api_key }}
+{{ range .Values.apm.namespaces }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: apm-agent-auth
+  namespace: {{ . }}
+data:
+{{- if $secret_token }}
+  secret_token: {{ b64enc $secret_token }}
+{{- end }}
+{{- if $api_key }}
+  api_key: {{ b64enc $api_key }}
+{{- end }}
+{{ end }}
+{{ end }}
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    {{- include "common.labels" . | indent 4 }}
+webhooks:
+  - name: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
+    clientConfig:
+      service:
+        name: {{ .Release.Name }}
+        namespace: {{ .Release.Namespace }}
+        path: "/"
+      caBundle: {{ b64enc $ca.Cert }}
+    failurePolicy: Fail
+    admissionReviewVersions: [ "v1", "v1beta1" ]
+    sideEffects: None
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["*"]
+        resources: ["pods"]
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: In
+          values:
+{{- range .Values.apm.namespaces }}
+            - {{ . | quote }}
+{{- end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "common.labels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "common.labels" . | indent 6 }}
+  template:
+    metadata:
+      annotations:
+        generated-cert: {{ sha256sum $cert.Cert }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "common.labels" . | indent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - -certFile=/opt/webhook/certs/{{ .Values.certFile }}
+            - -keyFile=/opt/webhook/certs/{{ .Values.keyFile }}
+            - -config=/opt/webhook/config/webhook.yaml
+          volumeMounts:
+            - name: {{ .Release.Name }}-certs
+              mountPath: /opt/webhook/certs
+              readOnly: true
+            - name: config
+              mountPath: /opt/webhook/config
+              readOnly: true
+          ports:
+            - name: https
+              containerPort: {{ .Values.container.port }}
+              protocol: TCP
+      volumes:
+        - name: {{ .Release.Name }}-certs
+          secret:
+            secretName: {{ include "certs.secret.name" . }}
+        - name: config
+          configMap:
+            name: webhook-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webhook-config
+  namespace: {{ .Release.Namespace}}
+data:
+  webhook.yaml: |
+{{ toYaml .Values.webhookConfig | indent 4 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  publishNotReadyAddresses: true
+  ports:
+    - port: 443
+      targetPort: https
+  selector:
+    {{- include "common.labels" . | indent 4 }}
