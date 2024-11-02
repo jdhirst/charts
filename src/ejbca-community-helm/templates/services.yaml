@@ -3,7 +3,9 @@ kind: Service
 metadata:
   name: {{ include "ejbca.fullname" . }}
   annotations:
-    {{- include "ejbca.serviceAnnotations" . | nindent 4 }}
+    {{- with .Values.services.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   labels:
     {{- include "ejbca.labels" . | nindent 4 }}
 {{- if .Values.services.directHttp.enabled }}

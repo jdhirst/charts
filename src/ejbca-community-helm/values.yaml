@@ -8,8 +8,6 @@ ejbca:
   useH2Persistence: false
   #existingH2PersistenceClaim: "database-data-claim"
 
-  serviceAnnotations: {}
-
   importExternalCas: false
   #externalCasSecret: managementca-secret
   
@@ -107,6 +105,7 @@ ejbca:
 
 # Only one of the following services can be enabled at a time
 services:
+  annotations: {}
   # not recommended, should only be used for debugging purpose
   directHttp:
     enabled: true
